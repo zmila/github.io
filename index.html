@@ -1,1 +1,59 @@
-Saluton, mondaĉo!
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Esperanto-Balia transliterado</title>
+    <style>
+        #input {
+            font-family: Vimala;
+        }
+
+        #output {
+            font-family: 'Noto Serif Balinese', serif;
+        }
+    </style>
+    <script src="./js/abugidilo.js"></script>
+    <script src="./js/ebalia_kodilo.js"></script>
+</head>
+
+<body>
+    <h1>Kodilo por la EBalia skribo</h1>
+    <p>Esperanto-Balia - estas transliterado de Esperanto per abugido bazita je la Baliaj signoj.</p>
+    <p>Tajpu Esperantan tekston, kaj la kodilo montros korespondan EBalian varianton.</p>
+
+    <form>
+        <textarea id="input" rows="5" cols="72"></textarea>
+    </form>
+    <textarea id="output" readonly="true" rows="5" cols="72" lang="ban"></textarea>
+
+    <div>
+        Ekzemple: <tt>na ne ni no nu naŭ nur nul nin nek nunas niajn  tut'malĉirkaŭkreskojn</tt><br/>
+        transliterumiĝas je: <tt>ᬦ ᬦᬾ ᬦᬶ ᬦᬹ ᬦᬸ ᬦᭂ ᬦᬸᬃ ᬦᬸᬺ ᬦᬶᬄ ᬦᬾᬓ᬴ ᬦᬸᬦᬵ ᬦᬶᬠᬂᬄ  ᬢᬸᬢ᬴ᬫᬺᬘᬶᬃᬓᭂᬓ᭄ᬭᭀᬓᬹᬂᬄ</tt>
+    </div>
+
+    <script>
+        if (document.readyState == 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+
+        function init() {
+            const input = document.getElementById("input");
+            input.addEventListener("keyup", handleKey);
+        }
+
+        function handleKey(e) {
+            const txt = document.getElementById("input").value;
+            if (txt.trim() === "") {
+                return;
+            }
+
+            const bali = new EbaliaKodilo().alBaliaTekston(txt);
+
+            document.getElementById("output").textContent = bali;
+        }
+    </script>
+</body>
+</html>
